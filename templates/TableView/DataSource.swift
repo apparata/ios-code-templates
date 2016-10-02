@@ -19,7 +19,7 @@ class __CLASS_PREFIX__DataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nameOfCell", for: indexPath) // as! NameOfCell
-        // cell.configure(item: item)
+        // cell.configure(modelObject: modelObject)
         return cell
     }
 }
