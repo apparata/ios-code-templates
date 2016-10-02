@@ -39,7 +39,6 @@ extension SegueHandlerType where Self: UIViewController, SegueIdentifier.RawValu
     
     func performSegueWithIdentifier(segueIdentifier: SegueIdentifier,
                                     sender: AnyObject?) {
-        
         performSegue(withIdentifier: segueIdentifier.rawValue, sender: sender)
     }
     
