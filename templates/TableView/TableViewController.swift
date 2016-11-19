@@ -25,7 +25,7 @@ class __CLASS_PREFIX__TableViewController: UITableViewController, SegueHandlerTy
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubvies()
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
