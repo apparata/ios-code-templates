@@ -6,7 +6,7 @@ import UIKit
 
 class __CLASS_PREFIX__DataSource: NSObject, UITableViewDataSource {
 
-    init() {
+    override init() {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
