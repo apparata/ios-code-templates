@@ -39,7 +39,7 @@ class __CLASS_PREFIX__ViewController: UIViewController, SegueHandlerType {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubvies()
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
