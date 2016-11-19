@@ -44,7 +44,7 @@ class __CLASS_PREFIX__TableViewController: UITableViewController, SegueHandlerTy
     private func configureAppearance() {
         //tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.hideSeparatorsBetweenUnusedCells()
+        hideSeparatorsBetweenUnusedCells()
         //tableView.hideTopGroupPadding()
     }    
 }
