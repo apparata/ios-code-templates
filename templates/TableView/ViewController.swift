@@ -15,6 +15,11 @@ class __CLASS_PREFIX__ViewController: UIViewController, SegueHandlerType {
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
+    
+    static func instantiateFromStoryboard() -> __CLASS_PREFIX__ViewController {
+        let storyboard = UIStoryboard(name: "__CLASS_PREFIX__", bundle: nil)
+        return storyboard.instantiateInitialViewController() as! __CLASS_PREFIX__ViewController
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
