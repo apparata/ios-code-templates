@@ -11,18 +11,10 @@
     <script>
     
     $(function() {
-        console.log("READY!");
-        $("#yearField").change(function () {
-            console.log("")
-            Cookies.set('__YEAR__', $("#yearField").val());
-        });
-
         $("#copyrightField").change(function () {
             Cookies.set('__COPYRIGHT_HOLDER__', $("#copyrightField").val()); 
         });
         
-        console.log("Year: " + Cookies.get('__YEAR__'));
-        $("#yearField").val(Cookies.get('__YEAR__'));
         $("#copyrightField").val(Cookies.get('__COPYRIGHT_HOLDER__')); 
     });
     
@@ -60,7 +52,8 @@
     }
     function addToZip(data) {
         
-        var year = $("#yearField").val();
+        var date = new Date();
+        var year = "" + date.getFullYear();
         var copyrightHolder = $("#copyrightField").val();
         var classPrefix = $("#classPrefixField").val();
         var variablePrefix = classPrefix.charAt(0).toLowerCase() + classPrefix.slice(1);
@@ -77,19 +70,18 @@
 <body>
 	<h1>Generate Code</h1>
     <div>
-        <span>Year</span><br>
-        <input id="yearField" type="text">
-    </div>
-    <div>
         <span>Copyright</span><br>
         <input id="copyrightField" type="text">
+        <br>
     </div>
     <div>
         <span>Class Prefix</span><br>
         <input id="classPrefixField" type="text">
+        <br>
     </div>
     <div>
         <input type="button" onclick="generateSwift()" value="Generate Swift (Chrome required)">
+        <br>
     </div>
 </body>
 </html>
