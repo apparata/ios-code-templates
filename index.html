@@ -5,9 +5,71 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="base64.js"></script>
+    <script src="FileSaver.min.js"></script>
+    <script src="jszip.min.js"></script>
+    <script>
+    function generateSwift() {
+
+        var zip = new JSZip();
+        
+        var templates = {
+            'TableView' : [
+                '__CLASS_PREFIX__DataSource.swift',
+                'SegueHandlerType.swift',
+                '__CLASS_PREFIX__TableViewController.swift',
+                'UITableViewController+Convenience.swift',
+                '__CLASS_PREFIX__ViewController.swift'
+            ]
+        };
+        
+        var deferreds = [];
+        for (var path in templates) {
+            var zipFolder = zip.folder(path)
+            var files = templates[path];
+            for (var index in files) {
+                var file = files[index];
+                var deferred = jQuery.get("templates/" + path + "/" + file, addToZip.bind({zipFolder: zipFolder, file: file}));
+                deferreds.push(deferred);
+            }
+        }
+                
+        $.when.apply(null, deferreds).done(function () {
+            zip.generateAsync({type:"blob"})
+            .then(function (blob) {
+                saveAs(blob, "generated-code.zip");
+            });
+        });
+    }
+    function addToZip(data) {
+        var string = data.replace(/__YEAR__/g, $("#yearField").val());
+        string = string.replace(/__COPYRIGHT_HOLDER__/g, $("#copyrightField").val());
+        string = string.replace(/__CLASS_PREFIX__/g, $("#classPrefixField").val());
+        string = string.replace(/__VARIABLE_PREFIX__/g, $("#variablePrefixField").val());
+        var file = this.file.replace(/__CLASS_PREFIX__/g, $("#classPrefixField").val())
+        this.zipFolder.file(file, string); 
+    }
+    </script>
 </head>
 <body>
 	<h1>Generate Code</h1>
+    <div>
+        <span>Year</span><br>
+        <input id="yearField" type="text">
+    </div>
+    <div>
+        <span>Copyright</span><br>
+        <input id="copyrightField" type="text">
+    </div>
+    <div>
+        <span>Class Prefix</span><br>
+        <input id="classPrefixField" type="text">
+    </div>
+    <div>
+        <span>Variable Prefix</span><br>
+        <input id="variablePrefixField" type="text">
+    </div>
+    <div>
+        <input type="button" onclick="generateSwift()" value="Generate Swift (Chrome required)">
+    </div>
 </body>
 </html>
