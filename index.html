@@ -7,7 +7,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="FileSaver.min.js"></script>
     <script src="jszip.min.js"></script>
+    <script src="jscookie.js"></script>
     <script>
+    
+    $(function() {
+        $("#yearField").val(Cookies.get('__YEAR__'));
+        $("#copyrightField").val(Cookies.get('__COPYRIGHT_HOLDER__')); 
+    });
+    
     function generateSwift() {
 
         var zip = new JSZip();
@@ -41,6 +48,10 @@
         });
     }
     function addToZip(data) {
+        
+        Cookies.set('__YEAR__', $("#yearField").val());
+        Cookies.set('__COPYRIGHT_HOLDER__', $("#copyrightField").val()); 
+        
         var string = data.replace(/__YEAR__/g, $("#yearField").val());
         string = string.replace(/__COPYRIGHT_HOLDER__/g, $("#copyrightField").val());
         string = string.replace(/__CLASS_PREFIX__/g, $("#classPrefixField").val());
