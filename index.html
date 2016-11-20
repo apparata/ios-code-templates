@@ -28,7 +28,7 @@
             var files = templates[path];
             for (var index in files) {
                 var file = files[index];
-                var deferred = jQuery.get("templates/" + path + "/" + file, addToZip.bind({zipFolder: zipFolder, file: file}));
+                var deferred = jQuery.get("/ios-code-templates/templates/" + path + "/" + file, addToZip.bind({zipFolder: zipFolder, file: file}));
                 deferreds.push(deferred);
             }
         }
