@@ -32,11 +32,11 @@
         
         var templates = {
             'TableView' : [
-                '__CLASS_PREFIX__DataSource.swift',
+                'CLASS_PREFIX__DataSource.swift',
                 'SegueHandlerType.swift',
-                '__CLASS_PREFIX__TableViewController.swift',
+                'CLASS_PREFIX__TableViewController.swift',
                 'UITableViewController+Convenience.swift',
-                '__CLASS_PREFIX__ViewController.swift'
+                'CLASS_PREFIX__ViewController.swift'
             ]
         };
         
@@ -58,14 +58,20 @@
             });
         });
     }
-    function addToZip(data) {        
-        var string = data.replace(/__YEAR__/g, $("#yearField").val());
-        string = string.replace(/__COPYRIGHT_HOLDER__/g, $("#copyrightField").val());
-        string = string.replace(/__CLASS_PREFIX__/g, $("#classPrefixField").val());
-        string = string.replace(/__VARIABLE_PREFIX__/g, $("#variablePrefixField").val());
-        var file = this.file.replace(/__CLASS_PREFIX__/g, $("#classPrefixField").val())
+    function addToZip(data) {
+        
+        var year = $("#yearField").val();
+        var copyrightHolder = $("#copyrightField").val();
+        var classPrefix = $("#classPrefixField").val();
+        var variablePrefix = classPrefix.charAt(0).toLowerCase() + classPrefix.slice(1);
+        
+        var string = data.replace(/__YEAR__/g, year);
+        string = string.replace(/__COPYRIGHT_HOLDER__/g, copyrightHolder);
+        string = string.replace(/__CLASS_PREFIX__/g, classPrefix);
+        string = string.replace(/__VARIABLE_PREFIX__/g, variablePrefix);
+        var file = this.file.replace(/CLASS_PREFIX__/g, classPrefix);
         this.zipFolder.file(file, string); 
-    }
+    
     </script>
 </head>
 <body>
@@ -81,10 +87,6 @@
     <div>
         <span>Class Prefix</span><br>
         <input id="classPrefixField" type="text">
-    </div>
-    <div>
-        <span>Variable Prefix</span><br>
-        <input id="variablePrefixField" type="text">
     </div>
     <div>
         <input type="button" onclick="generateSwift()" value="Generate Swift (Chrome required)">
