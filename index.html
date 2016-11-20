@@ -11,7 +11,9 @@
     <script>
     
     $(function() {
+        console.log("READY!");
         $("#yearField").change(function () {
+            console.log("")
             Cookies.set('__YEAR__', $("#yearField").val());
         });
 
@@ -19,6 +21,7 @@
             Cookies.set('__COPYRIGHT_HOLDER__', $("#copyrightField").val()); 
         });
         
+        console.log("Year: " + Cookies.get('__YEAR__'));
         $("#yearField").val(Cookies.get('__YEAR__'));
         $("#copyrightField").val(Cookies.get('__COPYRIGHT_HOLDER__')); 
     });
