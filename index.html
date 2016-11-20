@@ -11,6 +11,14 @@
     <script>
     
     $(function() {
+        $("#yearField").change(function () {
+            Cookies.set('__YEAR__', $("#yearField").val());
+        });
+
+        $("#copyrightField").change(function () {
+            Cookies.set('__COPYRIGHT_HOLDER__', $("#copyrightField").val()); 
+        });
+        
         $("#yearField").val(Cookies.get('__YEAR__'));
         $("#copyrightField").val(Cookies.get('__COPYRIGHT_HOLDER__')); 
     });
@@ -47,11 +55,7 @@
             });
         });
     }
-    function addToZip(data) {
-        
-        Cookies.set('__YEAR__', $("#yearField").val());
-        Cookies.set('__COPYRIGHT_HOLDER__', $("#copyrightField").val()); 
-        
+    function addToZip(data) {        
         var string = data.replace(/__YEAR__/g, $("#yearField").val());
         string = string.replace(/__COPYRIGHT_HOLDER__/g, $("#copyrightField").val());
         string = string.replace(/__CLASS_PREFIX__/g, $("#classPrefixField").val());
